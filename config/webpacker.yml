@@ -33,6 +33,7 @@ default: &default
     - .woff2
 
   extensions:
+    - .jsx
     - .mjs
     - .js
     - .sass
@@ -71,6 +72,9 @@ development:
     watch_options:
       ignored: '**/node_modules/**'
 
+build:
+  <<: *default
+  compile: true
 
 test:
   <<: *default
