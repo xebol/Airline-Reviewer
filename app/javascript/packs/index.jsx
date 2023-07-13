@@ -3,16 +3,20 @@
 // of the page.
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import App from '../components/App';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <Router>
-      {/* set up indirect path to point initially to App component */}
-      <Route path="/" component={App}/>
-    </Router>,
-    document.body.appendChild(document.createElement('div')),
-  );
+  const rootElement = document.getElementById('root');
+
+  if (rootElement) {
+    ReactDOM.createRoot(rootElement).render(
+      <Router>
+        <Routes>
+          <Route path="*" element={<App />} />
+        </Routes>
+      </Router>
+    );
+  }
 });

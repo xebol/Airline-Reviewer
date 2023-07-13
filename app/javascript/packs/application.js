@@ -9,13 +9,17 @@ import * as ActiveStorage from '@rails/activestorage';
 import 'channels';
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import HelloReact from '../hello_react'; // Import the React component
+import ReactDOM from 'react-dom/client';
+import App from '../components/App';
 
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<HelloReact />, document.getElementById('root'));
+  const rootElement = document.getElementById('root');
+
+  if (rootElement) {
+    ReactDOM.createRoot(rootElement).render(<App />);
+  }
 });
