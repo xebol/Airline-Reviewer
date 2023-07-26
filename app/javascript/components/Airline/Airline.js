@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Header from "./Header";
+import ReviewForm from "./ReviewForm";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -48,22 +49,23 @@ const Airline = () => {
 
   return (
     <Wrapper>
+      {loaded &&
+        <>
+          <Column>
+            <Main>
 
-      <Column>
-        <Main>
-          {loaded &&
-            <Header
-              attributes={airline.data.attributes}
-              reviews={airline.included}
-            />
-          }
-        </Main>
-        <div className="reviews"></div>
-      </Column>
-      <Column>
-        <div className="review-form">Review Form Goes Here</div>
-      </Column>
-
+              <Header
+                attributes={airline.data.attributes}
+                reviews={airline.included}
+              />
+            </Main>
+            <div className="reviews"></div>
+          </Column>
+          <Column>
+            <ReviewForm />
+          </Column>
+        </>
+      }
     </Wrapper>
   );
 };
