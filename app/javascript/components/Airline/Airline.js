@@ -67,8 +67,9 @@ const Airline = () => {
 
     axios.post('/api/v1/reviews', { review, airline_id })
       .then((response) => {
-        console.log('Response', response);
-        debugger;
+        const included = [...airline.included, response.data];
+        setAirline({ ...airline, included });
+        setReview({ title: '', description: '' });
       })
       .catch((error) => {
         console.log('Error:', error);
