@@ -79,7 +79,7 @@ const Airline = () => {
   const setRating = (event, score) => {
     event.preventDefault();
     
-    console.log('selected rating:', score)
+    setReview({...review, score})
   };
 
   return (
