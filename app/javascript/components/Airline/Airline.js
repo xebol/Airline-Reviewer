@@ -76,6 +76,12 @@ const Airline = () => {
       });
   };
 
+  const setRating = (event, score) => {
+    event.preventDefault();
+    
+    console.log('selected rating:', score)
+  };
+
   return (
     <Wrapper>
       {loaded &&
@@ -94,6 +100,7 @@ const Airline = () => {
             <ReviewForm
               handleChange={handleChange}
               handleSubmit={handleSubmit}
+              setRating={setRating}
               attributes={airline.data.attributes}
               review={review}
             />

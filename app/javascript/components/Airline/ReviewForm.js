@@ -8,7 +8,7 @@ import Hover from "./Stars/Selected";
 const RatingContainer = styled.div`
 text-align: center;
 border-radius: 4px;
-font-size: 18px;
+font-size: 24px;
 padding: 40px 0 10px 0;
 border: 1px solid #e6e6e6;
 background: #fff;`;
@@ -50,10 +50,10 @@ const RatingTitle = styled.div``;
 const ReviewForm = (props) => {
   const ratingOptions = [5, 4, 3, 2, 1].map((score, index) => {
     return (<>
-      <input type="radio" value={score} name="rating" onChange={() => {
+      <input type="radio" value={score} checked={props.review.score === score} name="rating" onChange={() => {
         console.log('selected:', score);
       }} id={`rating-${score}`} />
-      <label></label>
+        <label onClick={(event) => props.setRating(event, score)}></label>
     </>
     );
   });
