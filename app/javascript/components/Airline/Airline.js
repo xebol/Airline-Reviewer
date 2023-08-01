@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Header from "./Header";
 import ReviewForm from "./ReviewForm";
 import styled from "styled-components";
+import Review from "./Review";
 
 const Wrapper = styled.div`
 margin-left: auto;
@@ -67,7 +68,8 @@ const Airline = () => {
 
     axios.post('/api/v1/reviews', { review, airline_id })
       .then((response) => {
-        const included = [...airline.included, response.data];
+        //prepends the newest review but goes back to the bottom on refresh***
+        const included = [response.data.data, ...airline.included];
         setAirline({ ...airline, included });
         setReview({ title: '', description: '' });
       })
@@ -76,11 +78,26 @@ const Airline = () => {
       });
   };
 
+
+  //star of the airline
   const setRating = (event, score) => {
     event.preventDefault();
-    
-    setReview({...review, score})
+
+    setReview({ ...review, score });
   };
+
+
+  let reviews;
+  if (loaded && airline.included) {
+    reviews = airline.included.map((item, index) => {
+      return (
+        <Review
+          key={index}
+          attributes={item.attributes}
+        />
+      );
+    });
+  }
 
   return (
     <Wrapper>
@@ -93,8 +110,8 @@ const Airline = () => {
                 attributes={airline.data.attributes}
                 reviews={airline.included}
               />
+              {reviews}
             </Main>
-            <div className="reviews"></div>
           </Column>
           <Column>
             <ReviewForm
